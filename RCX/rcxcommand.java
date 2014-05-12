@@ -15,13 +15,14 @@ public class rcxcommand{
 
 		while(true){
 			int[] commandData = commandGet();
-			if(commandData[0] == -1){
-				commandReturn(-1);
+	
+			/*if(commandData[0] == -1){
+				commandReturn([-1,-1]);
 				break;
-			}
-			else {
+			}*/
+			//else {
 				commandReturn(commandRun(commandData));
-			}
+			//}
 		}
 
 	}
@@ -35,16 +36,17 @@ public class rcxcommand{
 		return command;
 	}
 
-	private static void commandReturn(int data) throws IOException{
-		IRSendInt(IRLinkOUT, data);
+	private static void commandReturn(int[] data) throws IOException{
+		IRSendInt(IRLinkOUT, data[0]);
+		IRSendInt(IRLinkOUT, data[1]);
 	}
 
-	private static int commandRun(int[] command){
+	private static int[] commandRun(int[] command){
 		int commandIndex = command[0]%10;
 			command[0] = command[0]/10;
 		int commandArgType = command[0]%10;
 
-		int response = 0;
+		int[] response = new int[2];
 		if(commandIndex == 1 || commandIndex == 2)
 			response = Move(commandIndex,commandArgType,command[1]);
 
@@ -52,16 +54,18 @@ public class rcxcommand{
 	}
 
 	/*
-	public static int runtimeCheckCommand(){
+	public static int runtimeCheck(){
 		try{
 			IRSendInt(IRLinkOUT,1);
 			return IRRecieveInt(IRLinkIN);
-		} catch(IOException e) { Sound.beepSequence(); }
+		} catch(IOException e) {}
 	}
 	*/
 
-        public static int Move(int moveType, int argType, int duration){
+        public static int[] Move(int moveType, int argType, int duration){
 		Sensor.S1.setPreviousValue(0);
+		int starttime = (int)System.currentTimeMillis();
+		int[] runData = new int[2];
 
 		if(duration >= 0){
 			if(moveType == 1)
@@ -76,24 +80,22 @@ public class rcxcommand{
 				bMotorROTR();
 		}
 
-		int response;
+
 
 		if(argType == 1){
-			int starttime = (int)System.currentTimeMillis();
 			while(Math.abs(((int)System.currentTimeMillis())-starttime) < Math.abs(duration)) {}
-			bMotorSTOP();
-			return ((int)System.currentTimeMillis()-starttime);
 		}
 
 		else if (argType == 2){
 			while(Math.abs(Sensor.S1.readValue()) <= Math.abs(duration)) {}
-			bMotorSTOP();
-			return Math.abs(Sensor.S1.readValue());
 		}
 
        		bMotorSTOP();
 
-		return -1;
+		runData[0] = Math.abs(Sensor.S1.readValue());
+		runData[1] = Math.abs((int)System.currentTimeMillis() - starttime);
+
+		return runData;
         }
 
 	// BASIC/PRIMITIVE METHODS

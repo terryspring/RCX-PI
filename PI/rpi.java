@@ -3,14 +3,14 @@ import java.io.*;
 
 public class rpi {
 	public static void main(String[] args) throws Exception {
-		
+
 		RCXPort port = new RCXPort("/dev/ttyUSB0");
 		OutputStream out = port.getOutputStream();
-		InputStream in = port.getInputStream();		
+		InputStream in = port.getInputStream();
 		int ch1 = 0;
 		int ch2 = 0;
 
-		while(true){						
+		while(true){
 			try {
 				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 				System.out.println("Command: ");
@@ -21,7 +21,7 @@ public class rpi {
 			catch (Exception e) {
 				e.printStackTrace();
 			}
-		
+
 	                try {
 	                        IRSendInt(out,ch1);
 				if(ch1 == -1)
@@ -32,9 +32,7 @@ public class rpi {
                                 e.printStackTrace();
                 	}
 
-			
-			System.out.println("Response" + IRRecieveInt(in));
-			
+			System.out.println("Response: " + IRRecieveInt(in) + "angles in " + IRRecieveInt(in) + "ms");
 		}
 	}
 
