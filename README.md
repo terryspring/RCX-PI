@@ -1,6 +1,9 @@
-This is an API for a RCX+PI robot. 
+### RCX-PI wiki
 
-This API should:
-- enable easy communitation between RCX and RPI
-- define basic instructions used by the RCX
-- enable simple linking with other libraries
+RCX-PI is an experimental robot platform API. Main target use is to integrate a Raspberry PI with a Lego Mindstorm RCX microcontroller robot.
+The plan is to integrate them together with data from a smart-phone's accelerometer and camera to allow seamless remote control and further robotics related development.
+
+Technologies used:
+* http://en.wikipedia.org/wiki/Lego_Mindstorms#RCX
+* http://archlinuxarm.org/
+* http://www.lejos.org/
