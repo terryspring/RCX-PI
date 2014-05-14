@@ -7,30 +7,28 @@ public class rpi {
 		RCXPort port = new RCXPort("/dev/ttyUSB0");
 		OutputStream out = port.getOutputStream();
 		InputStream in = port.getInputStream();
-		int ch1 = 0;
-		int ch2 = 0;
+		int commandHandle = 0;
+		int commandParameter = 0;
 
 		while(true){
 			try {
 				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 				System.out.println("Command: ");
-				ch1 = Integer.parseInt(br.readLine());
+				commandHandle = Integer.parseInt(br.readLine());
 				System.out.println("Param: ");
-				ch2 = Integer.parseInt(br.readLine());
+				commandParameter = Integer.parseInt(br.readLine());
 			}
 			catch (Exception e) {
 				e.printStackTrace();
 			}
 
-	                try {
-	                        IRSendInt(out,ch1);
-				if(ch1 == -1)
-					break;
-				IRSendInt(out,ch2);
-        	        }
-                	catch (Exception e) {
-                                e.printStackTrace();
-                	}
+	        try {
+				IRSendInt(out,commandHandle);
+				IRSendInt(out,commandParameter);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 
 			System.out.println("Response: " + IRRecieveInt(in) + "angles in " + IRRecieveInt(in) + "ms");
 		}
