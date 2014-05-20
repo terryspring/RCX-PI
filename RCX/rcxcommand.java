@@ -52,15 +52,6 @@ public class rcxcommand{
 		return response;
 	}
 
-	/*
-	public static int runtimeCheck(){
-		try{
-			IRSendInt(IRLinkOUT,1);
-			return IRRecieveInt(IRLinkIN);
-		} catch(IOException e) {}
-	}
-	*/
-
 	public static int[] Move(int moveType, int argType, int duration){
 		int[] runData = new int[2];
 		
@@ -83,7 +74,6 @@ public class rcxcommand{
 		}
 
 		// Keep thread busy and sample data
-		// Also initiate in comm with the RPI
 		if(argType == 1){
 			while(Math.abs(((int)System.currentTimeMillis())-starttime) < Math.abs(duration)) {}
 		}
