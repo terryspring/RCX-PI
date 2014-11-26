@@ -1,0 +1,19 @@
+{
+  "name": "RCXSERVER",
+  "version": "1.0.0",
+  "description": "RCXPI network router service",
+  "main": "server.js",
+  "scripts": {
+    "test": "console.log('test')",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "expressjs",
+    "rcxpi"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.10.4"
+  }
+}

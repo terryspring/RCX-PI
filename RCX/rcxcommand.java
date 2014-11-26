@@ -66,14 +66,14 @@ public class rcxcommand{
 			else if(moveType == 2)
 				bMotorROTL();
 		}
-				else if(duration < 0){
+        else if(duration < 0){
 			if(moveType == 1)
 							bMotorBKW();
 			else if(moveType == 2)
 				bMotorROTR();
 		}
 
-		// Keep thread busy and sample data
+		// Keep thread busy
 		if(argType == 1){
 			while(Math.abs(((int)System.currentTimeMillis())-starttime) < Math.abs(duration)) {}
 		}
