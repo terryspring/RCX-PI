@@ -10,7 +10,7 @@ var axisStats = {
 
 function setGyro (axis, val){
     axisStats[axis] = val;
-    console.log("Gyro set to: " + JSON.stringify(axisStats,null,4));
+    console.log("Gyro set to:\n" + JSON.stringify(axisStats,null,4));
 }
 
 function send2RCX (command, length){
