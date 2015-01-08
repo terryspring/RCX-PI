@@ -15,13 +15,13 @@ function setGyro (axis, val){
 
 function send2RCX (command, length){
     var options = {
-        url : "localhost:3001?command=" + command + "&length=" + length
+        url : "http://127.0.0.1:3001?command=" + command + "&length=" + length
     }
-    request(options, function (err, response, body) {
+    request.get(options, function (err, response, body) {
         if(!err)
             console.log('Request routed to RCX@' + options.url);
         else
-            console.log('Cannot send request to RCX@' + options.url);
+            console.log('Cannot send request to RCX@' + options.url + "\nErr: " + err);
     });
 }
 
