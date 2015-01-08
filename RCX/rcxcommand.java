@@ -62,13 +62,13 @@ public class rcxcommand{
 		// Start motors 
 		if(duration >= 0){
 			if(moveType == 1)
-							bMotorFWD();
+				bMotorFWD();
 			else if(moveType == 2)
 				bMotorROTL();
 		}
         else if(duration < 0){
 			if(moveType == 1)
-							bMotorBKW();
+				bMotorBKW();
 			else if(moveType == 2)
 				bMotorROTR();
 		}
