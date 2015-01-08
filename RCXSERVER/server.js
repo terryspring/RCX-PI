@@ -10,6 +10,7 @@ var axisStats = {
 
 function setGyro (axis, val){
     axisStats[axis] = val;
+    console.log("Gyro set to: " + JSON.stringify(axisStats,null,4));
 }
 
 function send2RCX (command, length){
@@ -18,13 +19,13 @@ function send2RCX (command, length){
     }
     request(options, function (err, response, body) {
         if(!err)
-            console.log('Request routed to ' + req.path);
+            console.log('Request routed to RCX@' + options.url);
         else
-            console.log('Cannot send request to ' + req.path);
+            console.log('Cannot send request to RCX@' + options.url);
     });
 }
 
-
+/*
 function getFromRCX (){
     var options = {
         url : "localhost:3001"
@@ -36,6 +37,7 @@ function getFromRCX (){
             console.log('Cannot send request to ' + req.path);
     });
 }
+*/
 
 app.get('/', function (req, res) {
     res.send('Turn back.');
@@ -43,15 +45,18 @@ app.get('/', function (req, res) {
 
 app.get('/move/*', function (req, res) {
     send2RCX(req.path.split('/')[2], req.path.split('/')[3]);
+    res.send('{"status" : true}');
 });
 
 app.get('/gyro/*', function (req, res) {
-    setData(req.path.split('/')[2], req.path.split('/')[3]);
-    res.send('OK');
+    setGyro(req.path.split('/')[2], req.path.split('/')[3]);
+    res.send('{"status" : true}');
 });
 
+/*
 app.get('/get*', function (req, res) {
     getFromRCX(res);
 });
+*/
 
 app.listen(3000);
