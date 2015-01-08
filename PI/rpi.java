@@ -17,6 +17,7 @@ public class rpi {
 		int commandParameter = 0;
 
 		while(true){
+            int[] commands;
 			try {
 
 
@@ -31,7 +32,7 @@ public class rpi {
                 // network socket
                 Socket connectionSocket = welcomeSocket.accept();
                 BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
-                clientSentence = inFromClient.readLine();
+                String clientSentence = inFromClient.readLine();
 
                 // extract parameters
                 String[] requestParam = clientSentence.split(" ");
@@ -42,7 +43,7 @@ public class rpi {
                 System.out.println("Parameters recieved and extracted: " + requestParam[0] + " " + requestParam[1]);
 
                 // convert params to integer
-                int[] commands = { Integer.parseInt(requestParam[0]), Integer.parseInt(requestParam[1]) };
+                commands = { Integer.parseInt(requestParam[0]), Integer.parseInt(requestParam[1]) };
 
                 connectionSocket.close();
 
