@@ -2,6 +2,8 @@ var express = require('express');
 var request = require('request');
 var app = express();
 
+app.use(express.static(__dirname + '/static'));
+
 var axisStats = {
     "x" : 0,
     "y" : 0,
@@ -42,6 +44,11 @@ function getFromRCX (){
 app.get('/', function (req, res) {
     res.send('Turn back.');
 });
+
+app.get('/remote', function (req, res) {
+    res.sendfile('./static/remote.html');
+});
+
 
 app.get('/move/*', function (req, res) {
     send2RCX(req.path.split('/')[2], req.path.split('/')[3]);
