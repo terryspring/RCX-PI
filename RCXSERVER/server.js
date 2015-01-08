@@ -21,7 +21,7 @@ function send2RCX (command, length){
         if(!err)
             console.log('Request routed to RCX@' + options.url);
         else
-            console.log('Cannot send request to RCX@' + options.url + "\nErr: " + err);
+            console.log('Erroneous sending of request to RCX@' + options.url + "\nErr: " + err);
     });
 }
 
