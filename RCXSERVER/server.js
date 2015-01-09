@@ -49,6 +49,9 @@ app.get('/remote', function (req, res) {
     res.sendfile('./static/remote.html');
 });
 
+app.get('/gyro', function (req, res) {
+    res.sendfile('./static/gyro.html');
+});
 
 app.get('/move/*', function (req, res) {
     send2RCX(req.path.split('/')[2], req.path.split('/')[3]);
