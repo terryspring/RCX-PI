@@ -1,15 +1,14 @@
-// sets up the events
-window.onload = function () {
-    window.ondevicemotion = function(event) {
-        /*
-        var accelerationX = event.accelerationIncludingGravity.x;
-        var accelerationY = event.accelerationIncludingGravity.y;
-        var accelerationZ = event.accelerationIncludingGravity.z;
-        */
-        issueCommand('x',event.accelerationIncludingGravity.x);
-        issueCommand('y',event.accelerationIncludingGravity.y);
-        issueCommand('z',event.accelerationIncludingGravity.z);
-    }
+// sets up the events/*
+if ((window.DeviceMotionEvent) {
+    window.addEventListener('devicemotion', deviceMotionHandler, false);
+
+}
+
+function deviceMotionHandler(eventData){
+    var acceleration = eventData.acceleration;
+    issueCommand("x",acceleration.x);
+    issueCommand("y",acceleration.y);
+    issueCommand("z",acceleration.z);
 }
 
 // requests from the API
